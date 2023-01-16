@@ -1,27 +1,20 @@
-let object =
-{
+let object = {
     a: 10,
     b: 20,
     c: 30,
-    d: 40,
+    d: 40
 }
+
 object[Symbol.iterator] = function () {
-    this.a = 0
+    this.a = 0;
     return {
         current: this.a,
         last: this.d,
-
         next: function () {
             if (this.current < this.last) {
-                return {
-                    done: false,
-                    value: this.current += 10
-                }
+                return {value: this.current += 10, done: false}
             } else {
-                return {
-                    done: true,
-                    value: undefined
-                }
+                return {value: undefined, done: true}
             }
         }
     }
@@ -32,16 +25,3 @@ console.log(iterObj.next())
 console.log(iterObj.next())
 console.log(iterObj.next())
 console.log(iterObj.next())
-
-for (let [key, value] of object) {
-    const p = document.createElement("p");
-    const b = document.createElement("strong");
-    const s = document.createElement("span");
-
-    b.innerText = key.toUpperCase() + ": ";
-    s.innerText = value;
-
-    p.appendChild(b);
-    p.appendChild(s);
-    document.body.appendChild(p);
-}
